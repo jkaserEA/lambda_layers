@@ -1,0 +1,65 @@
+version: 0.2
+env:
+  shell: bash
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - echo Entered the install phase
+      - apt-get update -y
+      - echo Installing python lib requirements
+      - mkdir ./src/python
+      - python3 -m venv ./src/python
+      - source ./src/python/bin/activate
+      - pip3 install -r requirements.txt
+      - cd src
+      - apt-get install -y zip unzip
+      - echo Finished Installing all Pre-reqs. Moving to Build Phase
+      - apt-get install -y sed
+  build:
+    commands:
+      - echo replacing ** with CodeBuildNumber
+      - sed -i "s/~/$CODEBUILD_BUILD_NUMBER/g" ../lambda_layers_template.yml
+      # - echo Build Phase will Zip necessary Files Starting with Create Key and Secret Function
+      # # Need to zip specific folders since zipping this whole folder location would include python distribution information.
+      # - cd aws_to_sharefile_credential_ship
+      # - zip -r ../mtc_aws_to_sharefile_credential_ship_$CODEBUILD_BUILD_NUMBER.zip connection.py get_item_by_path.py get_upload_path.py lambda_function.py upload_file.py
+      # - cd ..
+      # - mv mtc_aws_to_sharefile_credential_ship_$CODEBUILD_BUILD_NUMBER.zip ../mtc_aws_to_sharefile_credential_ship_$CODEBUILD_BUILD_NUMBER.zip
+      # - cd create_key_and_secret
+      # - zip -r ../mtc_create_key_and_secret_$CODEBUILD_BUILD_NUMBER.zip key_sec_gen_sql.py lambda_function.py
+      # - cd ..
+      # - mv mtc_create_key_and_secret_$CODEBUILD_BUILD_NUMBER.zip ../mtc_create_key_and_secret_$CODEBUILD_BUILD_NUMBER.zip
+      # - echo Build Phase will Zip files needed for Encrypt Admin App Function
+      # - cd encrypt_admin_app_creds
+      # - zip -r ../mtc_encrypt_admin_app_creds_$CODEBUILD_BUILD_NUMBER.zip AdminAppEncryptor.deps.json AdminAppEncryptor.dll AdminAppEncryptor.pdb AdminAppEncryptor.runtimeconfig.json Amazon.Lambda.Core.dll Amazon.Lambda.Serialization.Json.dll AWSSDK.Core.dll AWSSDK.SecretsManager.dll AWSSDK.SimpleSystemsManagement.dll Newtonsoft.Json.dll
+      # - cd ..
+      # - mv mtc_encrypt_admin_app_creds_$CODEBUILD_BUILD_NUMBER.zip ../mtc_encrypt_admin_app_creds_$CODEBUILD_BUILD_NUMBER.zip
+      # - echo Build Phase will Zip files needed for Insert into Edfi Admin Function
+      # - cd insert_into_edfi_admin
+      # - zip -r ../mtc_insert_into_edfi_admin_$CODEBUILD_BUILD_NUMBER.zip insert_admin_records_sql.py lambda_function.py
+      # - cd ..
+      # - mv mtc_insert_into_edfi_admin_$CODEBUILD_BUILD_NUMBER.zip ../mtc_insert_into_edfi_admin_$CODEBUILD_BUILD_NUMBER.zip
+      - echo Build Phase will Zip files needed for SB python libs lambda layer
+      - cd python/lib/python3.9
+      - mv ./site-packages ./python
+      - zip -r lambda_layers_template_$CODEBUILD_BUILD_NUMBER.zip ./python/*
+      - mv lambda_layers_template_$CODEBUILD_BUILD_NUMBER.zip ../../../../lambda_layers_template_$CODEBUILD_BUILD_NUMBER.zip
+      - cd ../../../..
+      - pwd
+      - mv lambda_layers_template.yml lambda_layers_template_$CODEBUILD_BUILD_NUMBER.yml
+      - echo Finished Zipping Files. Next phase will upload to s3
+  post_build:
+    commands:
+      - echo $CODEBUILD_SRC_DIR
+artifacts:
+  files:
+    # - ./mtc_aws_to_sharefile_credential_ship_$CODEBUILD_BUILD_NUMBER.zip
+    # - ./mtc_create_key_and_secret_$CODEBUILD_BUILD_NUMBER.zip
+    # - ./mtc_encrypt_admin_app_creds_$CODEBUILD_BUILD_NUMBER.zip
+    # - ./mtc_insert_into_edfi_admin_$CODEBUILD_BUILD_NUMBER.zip
+    - ./lambda_layers_template_$CODEBUILD_BUILD_NUMBER.zip
+    - ./lambda_layers_template_$CODEBUILD_BUILD_NUMBER.yml
+
+
