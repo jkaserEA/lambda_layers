@@ -9,12 +9,12 @@ phases:
       - echo Entered the install phase
       - apt-get update -y
       - echo Installing python lib requirements
-      # - mkdir ./src/python
-      # - python3 -m venv ./src/python
+      - sudo mkdir ./src/python
+      - sudo python3 -m venv ./src/python
       # - python3 -m ENV_DIR
-      # - source ./src/python/bin/activate
+      - sudo source ./src/python/bin/activate
       - pip3 install -r requirements.txt
-      # - cd src
+      - sudo cd src
       - apt-get install -y zip unzip
       - echo Finished Installing all Pre-reqs. Moving to Build Phase
       - apt-get install -y sed
