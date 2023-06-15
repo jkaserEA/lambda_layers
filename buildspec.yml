@@ -9,6 +9,7 @@ phases:
       - echo Entered the install phase
       - apt-get update -y
       - echo Installing python lib requirements
+      - sudo mkdir ./src
       - sudo mkdir ./src/python
       - sudo python3 -m venv ./src/python
       # - python3 -m ENV_DIR
