@@ -13,7 +13,7 @@ phases:
       - sudo mkdir ./src/python
       - python3 -m venv ./src/python
       # - python3 -m ENV_DIR
-      - sudo source ./src/python/bin/activate
+      # - sudo source ./src/python/bin/activate
       - pip3 install -r requirements.txt
       - sudo cd src
       - apt-get install -y zip unzip
