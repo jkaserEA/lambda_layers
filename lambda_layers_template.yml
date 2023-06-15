@@ -7,15 +7,27 @@ Parameters:
     Description: Name of S3 Bucket to source Build Artifacts.
 
 Resources:
-  SBFullPyLibLambdaLayer:
+  FullPyLibLambdaLayer:
     Type: AWS::Lambda::LayerVersion
     Properties:
       CompatibleRuntimes:
         - python3.9
         - python3.8
         - python3.7
-      LayerName: 'full-py-lib-sb-lambdas'
+      LayerName: 'full-py-lib-lambdas'
       Content:
         S3Bucket: !Ref ArtifactSourceS3
         S3Key: 'lambda_layers_template/lambda_layers_template_~.zip'
-      Description: 'Lambda Layer to assist with importing py libs needed for Starting Blocks Lambda functions.'
+      Description: 'Lambda Layer to assist with importing py libs needed for Lambda functions.'
+  # SBFullPyLibLambdaLayer:
+  #   Type: AWS::Lambda::LayerVersion
+  #   Properties:
+  #     CompatibleRuntimes:
+  #       - python3.9
+  #       - python3.8
+  #       - python3.7
+  #     LayerName: 'full-py-lib-sb-lambdas'
+  #     Content:
+  #       S3Bucket: !Ref ArtifactSourceS3
+  #       S3Key: 'startingblocks_multi_tenant_config_state_machine/startingblocks_pylib_lambda_layer_~.zip'
+  #     Description: 'Lambda Layer to assist with importing py libs needed for Starting Blocks Lambda functions.'
