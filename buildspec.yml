@@ -11,7 +11,7 @@ phases:
       - echo Installing python lib requirements
       # - mkdir ./src/python
       # - python3 -m venv ./src/python
-      - python3 -m venv 
+      - python3 -m ENV_DIR
       # - source ./src/python/bin/activate
       - pip3 install -r requirements.txt
       - cd src
