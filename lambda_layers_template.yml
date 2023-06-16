@@ -10,9 +10,9 @@ Metadata:
         defaut: S3 Bucket name containing this template      
 Parameters:
     ArtifactSourceS3:
-    Type: String
-    Description: Name of S3 Bucket to source Build Artifacts.
-    Default:  "lambda-layers-template-artifacts-dev"
+      Type: String
+      Description: Name of S3 Bucket to source Build Artifacts.
+      Default:  "lambda-layers-template-artifacts-dev"
 
 Resources:
   FullPyLibLambdaLayer:
