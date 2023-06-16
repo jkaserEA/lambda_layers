@@ -5,6 +5,7 @@ Parameters:
     ArtifactSourceS3:
     Type: String
     Description: Name of S3 Bucket to source Build Artifacts.
+    Default:  'lambda-layers-template-artifacts-dev'
 
 Resources:
   FullPyLibLambdaLayer:
