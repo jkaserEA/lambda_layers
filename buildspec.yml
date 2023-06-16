@@ -22,8 +22,8 @@ phases:
       - apt-get install -y sed
   build:
     commands:
-      - echo replacing ** with CodeBuildNumber
-      - sed -i "s/~/$CODEBUILD_BUILD_NUMBER/g" ../lambda_layers_template.yml
+      # - echo replacing ** with CodeBuildNumber
+      # - sed -i "s/~/$CODEBUILD_BUILD_NUMBER/g" ../lambda_layers_template.yml
       # - echo Build Phase will Zip necessary Files Starting with Create Key and Secret Function
       # # Need to zip specific folders since zipping this whole folder location would include python distribution information.
       # - cd aws_to_sharefile_credential_ship
