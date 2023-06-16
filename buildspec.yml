@@ -14,7 +14,8 @@ phases:
       - python3 -m venv ./src/python
       - source ./src/python/bin/activate
       - pip3 install -r requirements.txt
-      - sudo cd ./src
+      - pwd
+      - cd ./src
       - apt-get install -y zip unzip
       - echo Finished Installing all Pre-reqs. Moving to Build Phase
       - apt-get install -y sed
