@@ -1,6 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: >
   This template will deploy the lambda layers template.
+Metadata:
+  ParameterLabels:
+    ArtifactSourceS3:
+      defaut: S3 Bucket name containing this template  
+    ParameterLabels:
+      ArtifactSourceS3:
+        defaut: S3 Bucket name containing this template      
 Parameters:
     ArtifactSourceS3:
     Type: String
