@@ -12,7 +12,7 @@ Parameters:
     ArtifactSourceS3:
     Type: String
     Description: Name of S3 Bucket to source Build Artifacts.
-    Default:  'lambda-layers-template-artifacts-dev'
+    Default:  "lambda-layers-template-artifacts-dev"
 
 Resources:
   FullPyLibLambdaLayer:
@@ -24,7 +24,7 @@ Resources:
         - python3.7
       LayerName: 'full-py-lib-lambdas'
       Content:
-        S3Bucket: !Ref ArtifactSourceS3
+        S3Bucket: !Ref 'ArtifactSourceS3'
         S3Key: 'lambda_layers_template/lambda_layers_template_~.zip'
       Description: 'Lambda Layer to assist with importing py libs needed for Lambda functions.'
   # SBFullPyLibLambdaLayer:
