@@ -13,4 +13,3 @@ requests==2.27.1
 six==1.16.0
 urllib3==1.26.9
 gitpython==3.1.31
-git==2.34.1

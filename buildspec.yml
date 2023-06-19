@@ -19,6 +19,7 @@ phases:
       - apt-get install -y zip unzip
       - echo Finished Installing all Pre-reqs. Moving to Build Phase
       - apt-get install -y sed
+      - apt-get install -y git
   build:
     commands:
       - echo replacing ** with CodeBuildNumber
